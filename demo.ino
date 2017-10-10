@@ -69,12 +69,7 @@ while(millis() - previousMillis <= interval) { //현재 시각과 이전 시각�
     digitalWrite(LED2_R, LOW);
     digitalWrite(LED2_G, HIGH); //다시 초록 신호를 켜준다
     previousMillis = millis(); //현재시각 저장
- }
- else{
-  digitalWrite(LED2_G, HIGH);
-  delay(40000);
-  break;
- }
+ } 
 }
 interval = 40000; //인터벌 40초로 초기화
 digitalWrite(LED2_G, LOW);

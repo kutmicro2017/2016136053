@@ -275,14 +275,14 @@ void YellowBlink(int pin) {
 }
 
 
-void CleanMatrix() { //도트를 모두 끈다
+void CleanNumMatrix() { // 숫자부분 도트를 모두 끈다
   for (int i = 0; i < 8; i++) {
     digitalWrite(walkPedMatrixRow[i], LOW);
     digitalWrite(walkPedMatrixCol[i], HIGH);
   }
 }
 
-void CleanSignalMatrix() {//도트를 모두 끈다
+void CleanSignalMatrix() {// 그림부분 도트를 모두 끈다
   for (int i = 0; i < 8; i++) {
     digitalWrite(drowSignalRow[i], LOW);
     digitalWrite(drowSignalCol[i], HIGH);

@@ -275,7 +275,7 @@ void YellowBlink(int pin) {
 }
 
 
-void CleanNumMatrix() { // 숫자부분 도트를 모두 끈다
+void CleanMatrix() { // 숫자부분 도트를 모두 끈다
   for (int i = 0; i < 8; i++) {
     digitalWrite(walkPedMatrixRow[i], LOW);
     digitalWrite(walkPedMatrixCol[i], HIGH);

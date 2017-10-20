@@ -300,6 +300,7 @@ void printNumMatrix(int num) { //남은 시간 출력
       if (walkSignNumber[num % 10][r][c]) digitalWrite(walkPedMatrixCol[c + 4], LOW);
     }
     delay(1); //시간지연을 조금이라도 줘야 도트가 깨끗하게 보임
+    CleanMatrix();
   }
 }
 
@@ -311,5 +312,6 @@ void printSignalMatrix(int num) { //정지(0)인지 통행 가능(1)인지 아�
       if (signImage[num][r][c]) digitalWrite(drowSignalCol[c], LOW);
     }
     delay(1);
+    CleanSignalMatrix();
   }
 }

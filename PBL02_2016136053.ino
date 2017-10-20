@@ -1,4 +1,3 @@
-// 4거리 3색신호등,,Led가 12개.. 각 번호의 디지털 핀에 연걸
 #define RedLED_1 12
 #define YellowLED_1 11
 #define GreenLED_1 10 //상하 연동 LED
@@ -167,7 +166,7 @@ void printNumMatrix(int num);
 void printSignalMatrix(int num);
 void CleanSignalMatrix();
 void tTof() { //스위치가 눌렸을 때 실행되는 함수
-  if (digitalRead(GreenLED_1) == HIGH) state = false; //스위치가 눌리면 state의 값을 바꿔준다
+  if (digitalRead(GreenLED_1) == HIGH || digitalRead(RedLED_1) == HIGH ) state = false; //스위치가 눌리면 state의 값을 바꿔준다
 }
 
 void setup() {
@@ -202,11 +201,14 @@ void loop() {
     if (state == false) { //스위치가 눌렸으면
       state = true;
       unsigned int pedSignStart, pedSignEnd;
-      pedSignStart = pedSignEnd = millis();
-      while (pedSignEnd - pedSignStart < PedestrianDelayTime ) {
+      
+      for (int num = 3; num >= 0; num--) {
+        pedSignStart = pedSignEnd = millis();
+      while (pedSignEnd - pedSignStart < 1000 ) {
         printNumMatrix(DelayTime / 1000);
         printSignalMatrix(0);
         pedSignEnd = millis();
+      }
       }
       digitalWrite(GreenLED_1, LOW); //초록불을 꺼준다
       YellowBlink(YellowLED_1);
@@ -239,6 +241,10 @@ void loop() {
     while (endTime - startTime < 1000) {
       printNumMatrix(num);
       printSignalMatrix(1);
+      if(state == false){
+        state = true;
+        num = DelayTime/1000;
+      }
       endTime = millis();
     }
   }
@@ -275,14 +281,14 @@ void YellowBlink(int pin) {
 }
 
 
-void CleanMatrix() { // 숫자부분 도트를 모두 끈다
+void CleanMatrix() { //도트를 모두 끈다
   for (int i = 0; i < 8; i++) {
     digitalWrite(walkPedMatrixRow[i], LOW);
     digitalWrite(walkPedMatrixCol[i], HIGH);
   }
 }
 
-void CleanSignalMatrix() {// 그림부분 도트를 모두 끈다
+void CleanSignalMatrix() {//도트를 모두 끈다
   for (int i = 0; i < 8; i++) {
     digitalWrite(drowSignalRow[i], LOW);
     digitalWrite(drowSignalCol[i], HIGH);
